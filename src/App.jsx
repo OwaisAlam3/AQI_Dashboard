@@ -34,7 +34,7 @@ function App() {
         <div className="m-8">
         <a
             href="https://www.airnow.gov/aqi/aqi-basics/"
-            className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-md bg-burgundy-500 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
              target="_blank"
   >
             Check AQI Safe Levels
