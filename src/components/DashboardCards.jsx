@@ -1,7 +1,4 @@
-import {
-  CheckCircledIcon,
-  ExclamationTriangleIcon,
-} from "@radix-ui/react-icons";
+import { ThermometerIcon, DropletIcon, CloudSunIcon, GaugeIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
@@ -9,101 +6,115 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { LineChart, Line, ResponsiveContainer } from "recharts";
+
+const tempData = [
+  { value: 27 }, { value: 28 }, { value: 28.5 }, { value: 29 }, { value: 28 }, { value: 27.5 }
+];
+
+const humidityData = [
+  { value: 58 }, { value: 60 }, { value: 59 }, { value: 61 }, { value: 60 }, { value: 59.5 }
+];
 
 const DashboardCards = () => {
   return (
-    <>
-      <div className="grid px-8 mt-8 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">AQI</CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <CheckCircledIcon color="green" />
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Safe</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">50</div>
-            <p className="text-xs text-muted-foreground">
-              +2.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 ">
-            <CardTitle className="text-sm font-medium">
-              Carbon Monoxide (CO)
-            </CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <ExclamationTriangleIcon color="red" />
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Not Safe</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">167</div>
-            <p className="text-xs text-muted-foreground">
-              +2.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Particulate Matter 2.5(PM)
-            </CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <ExclamationTriangleIcon color="orange" />
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Take precautions</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">50</div>
-            <p className="text-xs text-muted-foreground">
-              +1.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Nitrgen Dioxide (NO2)
-            </CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <CheckCircledIcon color="green" />
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Safe</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">22</div>
-            <p className="text-xs text-muted-foreground">+9% from last month</p>
-          </CardContent>
-        </Card>
-      </div>
-    </>
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-8 mt-8">
+      
+      {/* Temperature Card */}
+      <Card className="bg-background/60 backdrop-blur-md border border-border shadow-lg rounded-2xl">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-base font-semibold text-cyan-400">Temperature</CardTitle>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <ThermometerIcon className="text-cyan-400" size={20} />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Measured in °C</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-3xl font-bold text-primary">28°C</div>
+          <ResponsiveContainer width="100%" height={50}>
+            <LineChart data={tempData}>
+              <Line type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={2} dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-xs text-muted-foreground">Stable</p>
+        </CardContent>
+      </Card>
+
+      {/* Humidity Card */}
+      <Card className="bg-background/60 backdrop-blur-md border border-border shadow-lg rounded-2xl">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-base font-semibold text-cyan-400">Humidity</CardTitle>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <DropletIcon className="text-cyan-400" size={20} />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Measured in %</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-3xl font-bold text-primary">60%</div>
+          <ResponsiveContainer width="100%" height={50}>
+            <LineChart data={humidityData}>
+              <Line type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={2} dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-xs text-muted-foreground">Comfortable</p>
+        </CardContent>
+      </Card>
+
+      {/* Weather Card */}
+      <Card className="bg-background/60 backdrop-blur-md border border-border shadow-lg rounded-2xl">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-base font-semibold text-cyan-400">Weather</CardTitle>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <CloudSunIcon className="text-cyan-400" size={20} />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>External Data</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-2xl font-bold text-primary">Sunny 32°C</div>
+          <p className="text-xs text-muted-foreground">Karachi, Pakistan</p>
+        </CardContent>
+      </Card>
+
+      {/* Air Pressure Card */}
+      <Card className="bg-background/60 backdrop-blur-md border border-border shadow-lg rounded-2xl">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-base font-semibold text-cyan-400">Air Pressure</CardTitle>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <GaugeIcon className="text-cyan-400" size={20} />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Measured in hPa</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-3xl font-bold text-primary">1013 hPa</div>
+          <p className="text-xs text-muted-foreground">Normal Pressure</p>
+        </CardContent>
+      </Card>
+
+    </div>
   );
 };
 
