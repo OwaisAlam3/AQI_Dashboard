@@ -82,7 +82,7 @@ const Alerts = () => {
   }, []); // Empty dependency array to fetch data only on component mount
 
   return (
-    <Card className="m-4 bg-gray-800 shadow-lg rounded-lg">
+    <Card className="p-6 bg-gray-900 rounded-xl shadow-md">
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-white">Alerts</CardTitle>
         <CardDescription className="text-sm text-gray-400">Temperature and Humidity Alerts</CardDescription>
