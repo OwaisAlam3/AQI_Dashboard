@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react"; // Import React explicitly
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircledIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
@@ -21,7 +21,7 @@ const Alerts = () => {
   });
   const [alerts, setAlerts] = useState([]);
 
-  // Fetch sensor data from the backend (you can replace this with your actual endpoint)
+  // Fetch sensor data from the backend
   useEffect(() => {
     axios.get('/api/sensor-data')  // Ensure this URL is correct for your setup
       .then((response) => {
@@ -82,29 +82,33 @@ const Alerts = () => {
   }, []); // Empty dependency array to fetch data only on component mount
 
   return (
-    <Card className="m-4">
+    <Card className="m-4 bg-gray-800 shadow-lg rounded-lg">
       <CardHeader>
-        <CardTitle>Alerts</CardTitle>
-        <CardDescription>Temperature and Humidity Alerts</CardDescription>
+        <CardTitle className="text-xl font-semibold text-white">Alerts</CardTitle>
+        <CardDescription className="text-sm text-gray-400">Temperature and Humidity Alerts</CardDescription>
       </CardHeader>
-      {alerts.length > 0 ? (
-        alerts.map((alert, index) => (
-          <CardContent key={index}>
-            <div
-              className={`border-l-4 p-2 ${
-                alert.level === "high" ? "border-l-red-600 bg-secondary" : "border-l-green-600 bg-success"
-              }`}
-            >
-              <p>{alert.time}</p>
-              <p className="font-medium">{alert.message}</p>
+      <CardContent>
+        {alerts.length > 0 ? (
+          alerts.map((alert, index) => (
+            <div key={index} className={`mb-4 p-4 rounded-lg 
+              ${alert.level === "high" ? "bg-red-600 text-white" : "bg-green-600 text-white"}`}>
+              <div className="flex items-center">
+                {alert.level === "high" ? (
+                  <ExclamationTriangleIcon className="w-6 h-6 text-white mr-2" />
+                ) : (
+                  <CheckCircledIcon className="w-6 h-6 text-white mr-2" />
+                )}
+                <div>
+                  <p className="font-medium">{alert.message}</p>
+                  <p className="text-xs">{alert.time}</p>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        ))
-      ) : (
-        <CardContent>
-          <p>No alerts. Temperature and humidity are within safe limits.</p>
-        </CardContent>
-      )}
+          ))
+        ) : (
+          <p className="text-gray-500">No alerts. Temperature and humidity are within safe limits.</p>
+        )}
+      </CardContent>
     </Card>
   );
 };
