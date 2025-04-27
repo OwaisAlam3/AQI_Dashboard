@@ -1,14 +1,6 @@
-# Real Time Air quality monitoring system on ESP8266 and Google Spreadsheet
+Real-Time Air Quality Monitoring System using ESP8266, React, and Google Sheets
+This project implements a real-time air quality monitoring system using the ESP8266 microcontroller, React for the frontend, and Google Sheets for data storage.
 
-This project is a real-time air quality monitoring system implemented on ESP8266 microcontroller. The system utilizes a combination of React for the frontend, Google Spreadsheet for data storage, and Django for the backend.
+The ESP8266 collects air quality data from sensors and sends it to a backend server. The React-based frontend visualizes this data in real-time, while Google Sheets serves as a simple, scalable data storage solution for easy management and analysis.
 
-The ESP8266 microcontroller is responsible for collecting air quality data from sensors and sending it to the backend server. The React frontend provides a user-friendly interface for visualizing the air quality data in real-time. The data is stored in a Google Spreadsheet, which allows for easy data management and analysis.
-
-The Django backend handles the communication between the ESP8266 and the Google Spreadsheet. It receives the data from the ESP8266 and stores it in the spreadsheet. Additionally, it provides APIs for retrieving and manipulating the data.
-
-Overall, this project enables real-time monitoring of air quality using ESP8266, React, Google Spreadsheet, and Django, providing a comprehensive solution for air quality analysis and visualization.
-
-- Frontend-link : https://github.com/mspatel18/AQI-dashboard
-- Backend-link : https://github.com/mspatel18/aqm-backend
-- ESP8266-link : https://github.com/mspatel18/aqi-esp82-sketch
-<img src="https://github.com/mspatel18/AQI-esp82-sketch/assets/90763685/b001c585-a104-4ffe-8a10-6c3f3803f228" width=500px/>
+The backend, built with Django, facilitates communication between the ESP8266 and Google Sheets. It processes incoming data from the ESP8266, stores it in the spreadsheet, and exposes APIs for data retrieval and manipulation.![image](https://github.com/user-attachments/assets/cdcc2a60-356e-46b3-aa30-88ef83b2e0e0)
